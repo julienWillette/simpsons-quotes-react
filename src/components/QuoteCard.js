@@ -1,19 +1,24 @@
 import React from 'react';
-import './QuoteCard.css'
+import './QuoteCard.css';
+import PropTypes from 'prop-types';
 
-function QuoteCard() {
+function QuoteCard(props, {image, quote, character}) {
     return (
       <figure class="QuoteCard">
-            <img src="https://pm1.narvii.com/7070/aeaeadea89d89327a8e5f4f83d10272dc337425fr1-1200-1200v2_128.jpg"
-            alt="Nelson Muntz"></img>
+            <img src={props.image} alt={props.character} />
             <figcaption>
                 <blockquote>
-                hoplifting is a victimless crime, like punching someone in the dark.
+                {props.quote}
                 </blockquote>
-                <cite>Nelson Muntz</cite>
+                <cite>{props.characterFirstName + ' ' + props.characterLastName}</cite>
             </figcaption>
       </figure>
     );
-  }
+}
+
+QuoteCard.propTypes = {
+      characterFirstName: PropTypes.string.isRequired,
+      characterLastName: PropTypes.string.isRequired,
+    };
   
   export default QuoteCard;
