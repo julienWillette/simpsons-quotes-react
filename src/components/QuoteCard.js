@@ -1,24 +1,35 @@
 import React from 'react';
 import './QuoteCard.css';
-import PropTypes from 'prop-types';
 
-function QuoteCard(props, {image, quote, character}) {
+class QuoteCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      favorite: false,
+    };
+  } 
+  render() {
     return (
       <figure class="QuoteCard">
-            <img src={props.image} alt={props.character} />
+            <img src={this.props.image} alt={this.props.character} />
             <figcaption>
                 <blockquote>
-                {props.quote}
+                {this.props.quote}
                 </blockquote>
-                <cite>{props.characterFirstName + ' ' + props.characterLastName}</cite>
+                <p>
+                  <cite>{this.props.character}</cite>
+                  <span
+                  className={this.state.favorite ? 'is-favorite' : ''}
+                  onClick={ event => {
+                    const newFavorite = !this.state.favorite;
+                    this.setState({ favorite: newFavorite });
+                  }}
+                  >&#9733;</span>
+                </p>
             </figcaption>
       </figure>
     );
+  }
 }
-
-QuoteCard.propTypes = {
-      characterFirstName: PropTypes.string.isRequired,
-      characterLastName: PropTypes.string.isRequired,
-    };
   
   export default QuoteCard;
